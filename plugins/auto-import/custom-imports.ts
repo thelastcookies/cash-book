@@ -28,7 +28,4 @@ export const customImports: ImportsMap = {
     'sum',
     'difference',
   ],
-  'vant': [
-    'showToast',
-  ],
 };

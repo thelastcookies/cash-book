@@ -4,13 +4,14 @@ import {
   presetAttributify,
   presetIcons,
   presetTypography,
-  presetUno,
+  presetWind3,
   transformerDirectives,
 } from 'unocss';
 import presetThelastcookies from './preset';
 
 export default defineConfig({
   presets: [
+    presetWind3(),
     presetAttributify(),
     presetIcons({
       collections: {

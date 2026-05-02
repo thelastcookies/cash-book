@@ -1,6 +1,7 @@
 import AutoImport from 'unplugin-auto-import/vite';
 import type { PluginOption } from 'vite';
 import { customImports } from './custom-imports';
+import { VantResolver } from '@vant/auto-import-resolver';
 
 export const AutoImportPluginConfig: PluginOption = AutoImport({
   include: [
@@ -34,4 +35,5 @@ export const AutoImportPluginConfig: PluginOption = AutoImport({
     'src/views/form/libs',
   ],
   vueTemplate: true,
+  resolvers: [VantResolver()],
 });

@@ -1,4 +1,4 @@
-import type { BasePaginationRequest } from '@/api/base/types'
+import type { BasePaginationRequest } from '@/api/types'
 
 export interface GetRecordQuery extends BasePaginationRequest {
   record?: string

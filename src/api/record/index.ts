@@ -1,5 +1,5 @@
-import type { BaseResponseBody, PaginatedData } from '@/api/base/types';
-import type { GetRecordQuery, RecordRecord, RecordRequestRecord } from '@/api/record/types';
+import type { BaseResponseBody, PaginatedData } from '@/api/types'
+import type { GetRecordQuery, RecordRecord, RecordRequestRecord } from '@/api/record/types'
 
 export const getRecords = (params: GetRecordQuery) => {
   return useGet<BaseResponseBody<PaginatedData<RecordRecord>>, GetRecordQuery>(
