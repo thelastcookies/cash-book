@@ -27,5 +27,6 @@ export const customImports: ImportsMap = {
     'min',
     'sum',
     'difference',
+    'groupBy',
   ],
 };

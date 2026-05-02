@@ -11,14 +11,27 @@ const formData = reactive({
 
 const showDatePicker = ref(false);
 const currentDate = ref([now.format('YYYY'), now.format('MM'), now.format('DD')]);
+const currentTime = ref([now.format('HH'), now.format('mm')]);
 
-const onDateConfirm = ({ selectedValues }: { selectedValues: string[] }) => {
-  formData.time = selectedValues.join('-') + ' ' + formData.time.split(' ')[1];
+const onPickerConfirm = () => {
+  formData.time = currentDate.value.join('-') + ' ' + currentTime.value.join(':');
+  showDatePicker.value = false;
+};
+
+const onPickerCancel = () => {
   showDatePicker.value = false;
 };
 
 const records = ref<RecordRecord[]>([]);
 const reversedRecords = computed(() => [...records.value].reverse());
+const groupedRecords = computed(() => {
+  const grouped = groupBy(reversedRecords.value, (r: RecordRecord) => dayjs(r.createdAt).format('YYYY-MM-DD'));
+  return Object.entries(grouped).map(([date, items]) => ({
+    date,
+    label: dayjs(date).format('M月D日'),
+    items,
+  }));
+});
 const refreshing = ref(false);
 const currentPage = ref(1);
 const pageSize = 10;
@@ -33,12 +46,28 @@ const fetch = async () => {
   refreshing.value = false;
 };
 
-onMounted(async () => {
+onMounted(() => {
+  init();
+});
+
+const init = async () => {
+  currentPage.value = 1;
+  records.value = [];
   await fetch();
   await nextTick(() => {
     window.scrollTo(0, document.documentElement.scrollHeight);
   });
-});
+};
+
+const handleDelete = async (id: number) => {
+  const res = await deleteRecord(id);
+  if (res.success) {
+    showToast('删除成功');
+    await init();
+  } else {
+    showToast(res.msg || '删除失败');
+  }
+};
 
 const onSubmit = async () => {
   if (!formData.time) {
@@ -55,23 +84,35 @@ const onSubmit = async () => {
     amount: Number(formData.amount),
   });
   if (res.success) {
-    records.value.unshift(res.data);
     formData.item = '';
     formData.amount = '';
+    await init();
   } else {
     showToast(res.msg || '保存失败');
   }
 };
-
 </script>
 
 <template>
   <div class="min-h-screen bg-#f7f8fa flex flex-col">
     <div class="flex-1 pb-3">
       <van-pull-refresh v-model="refreshing" @refresh="fetch">
-        <van-cell-group inset v-for="record in reversedRecords" :key="record.id" class="mt-2!">
-          <van-cell :title="record.record || '未命名'" :value="`¥${(record.amount ?? 0).toFixed(2)}`"
-            :label="dayjs(record.createdAt).format('YYYY-MM-DD HH:mm')" />
+        <van-cell-group
+          inset
+          v-for="group in groupedRecords"
+          :key="group.date"
+          :title="group.label"
+        >
+          <van-swipe-cell v-for="record in group.items" :key="record.id">
+            <van-cell
+              :title="record.record || '未命名'"
+              :value="`¥${(record.amount ?? 0).toFixed(2)}`"
+              :label="dayjs(record.createdAt).format('HH:mm')"
+            />
+            <template #right>
+              <van-button square type="danger" text="删除" class="h-full!" @click="handleDelete(record.id)" />
+            </template>
+          </van-swipe-cell>
         </van-cell-group>
       </van-pull-refresh>
     </div>
@@ -111,13 +152,19 @@ const onSubmit = async () => {
     </div>
 
     <van-popup v-model:show="showDatePicker" position="bottom" round>
-      <van-date-picker
-        v-model="currentDate"
-        :min-date="new Date(2020, 0, 1)"
-        :max-date="new Date()"
-        @confirm="onDateConfirm"
-        @cancel="showDatePicker = false"
-      />
+      <van-picker-group
+        title="选择时间"
+        :tabs="['选择日期', '选择时间']"
+        @confirm="onPickerConfirm"
+        @cancel="onPickerCancel"
+      >
+        <van-date-picker
+          v-model="currentDate"
+          :min-date="new Date(2020, 0, 1)"
+          :max-date="new Date()"
+        />
+        <van-time-picker v-model="currentTime" />
+      </van-picker-group>
     </van-popup>
   </div>
 </template>
