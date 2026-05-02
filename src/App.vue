@@ -2,5 +2,5 @@
 </script>
 
 <template>
-  <Bookkeeping />
+  <CashBook />
 </template>
