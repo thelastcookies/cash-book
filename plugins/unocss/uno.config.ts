@@ -1,0 +1,65 @@
+// uno.config.ts
+import {
+  defineConfig,
+  presetAttributify,
+  presetIcons,
+  presetTypography,
+  presetUno,
+  transformerDirectives,
+} from 'unocss';
+import presetThelastcookies from './preset';
+
+export default defineConfig({
+  presets: [
+    presetAttributify(),
+    presetIcons({
+      collections: {
+        mdi: () => import('@iconify-json/mdi/icons.json').then(i => i.default),
+      },
+    }),
+    presetTypography(),
+    presetThelastcookies(),
+  ],
+  transformers: [
+    transformerDirectives(),
+  ],
+  safelist: [
+    // 表单生成器 icon
+    'i-mdi-pencil',
+    'i-mdi-format-list-bulleted',
+    'i-mdi-numeric',
+    'i-mdi-star-check',
+    'i-mdi-radiobox-marked',
+    'i-mdi-checkbox-marked-outline',
+    'i-mdi-calendar',
+    'i-mdi-calendar-clock',
+    'i-mdi-account-check',
+    'i-mdi-lan',
+    'i-mdi-star',
+    'i-mdi-eye',
+    'i-mdi-heart',
+    'i-mdi-trophy',
+    'i-mdi-thumb-up',
+    // 菜单 icon
+    'i-mdi-face-woman-shimmer-outline',
+    'i-mdi-camera-outline',
+    'i-mdi-cog-outline',
+    'i-mdi-link',
+    'i-mdi-image-filter-drama-outline',
+    'i-mdi-engine-outline',
+    'i-mdi-clipboard-list-outline',
+
+    // 常用预留
+    ...[
+      '#642AB5',
+      '#CB2B83',
+      '#D32029',
+      '#D84A1B',
+      '#D87A16',
+      '#D8BD14',
+      '#D89614',
+    ].reduce((list: string[], color: string) => {
+      return [...list, `!border-[${color}]`, `c-[${color}]`, `bg-[${color}]`];
+    }, []),
+  ],
+});
