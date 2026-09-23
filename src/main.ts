@@ -6,16 +6,6 @@ import '@/assets/style/index.less';
 
 export const app = createApp(App);
 
-// // Pinia
-// import { createPinia } from 'pinia';
-// app.use(createPinia());
-//
-// // router
-// import router from '@/router';
-// // 导入路由守卫
-// import '@/router/guards.ts';
-// app.use(router);
-
 import 'vant/lib/index.css';
 
 app.mount('#app');
