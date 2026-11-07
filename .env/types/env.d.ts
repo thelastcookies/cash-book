@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+/// <reference types="vue-router/auto" />
 
 interface ImportMetaEnv {
   // 项目标题
