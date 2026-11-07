@@ -1,8 +1,8 @@
 import type { PluginOption } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import { UnoCSSPluginConfig } from './unocss';
-import { AutoImportPluginConfig } from './auto-import';
-import { VueComponentPluginConfig } from './vue-component';
+import { UnoCSSPluginConfig } from './unocss/index.ts';
+import { AutoImportPluginConfig } from './auto-import/index.ts';
+import { VueComponentPluginConfig } from './vue-component/index.ts';
 
 /**
  * 注入 vite 的插件

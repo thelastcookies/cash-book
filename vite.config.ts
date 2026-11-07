@@ -1,6 +1,6 @@
 import { defineConfig, loadEnv } from 'vite';
 import { fileURLToPath, URL } from 'node:url'
-import { createVitePlugins } from './plugins';
+import { createVitePlugins } from './plugins/index.ts';
 
 const baseSrc = fileURLToPath(new URL('./src', import.meta.url));
 const imageSrc = fileURLToPath(new URL('./src/assets/images', import.meta.url));

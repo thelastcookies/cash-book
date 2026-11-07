@@ -1,6 +1,6 @@
 import AutoImport from 'unplugin-auto-import/vite';
 import type { PluginOption } from 'vite';
-import { customImports } from './custom-imports';
+import { customImports } from './custom-imports.ts';
 import { VantResolver } from '@vant/auto-import-resolver';
 
 export const AutoImportPluginConfig: PluginOption = AutoImport({
