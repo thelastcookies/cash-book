@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.0](https://github.com/thelastcookies/cash-book/compare/v0.1.0...v0.2.0) (2026-11-18)
+
+
+### Features
+
+* 接入 OIDC 登录验证 ([3317404](https://github.com/thelastcookies/cash-book/commit/331740460417c7ef617d49d30df950830880c467))
+* 新增用户页面和登出功能 ([d28bb96](https://github.com/thelastcookies/cash-book/commit/d28bb9690bb709b05c307bd9bdbd612a867f0552))
+* 新增菜单框架 ([0f6ae75](https://github.com/thelastcookies/cash-book/commit/0f6ae75909f6e856cacf048a37d6b55f14334663))
+
 ## 0.1.0 (2026-11-05)
 
 
