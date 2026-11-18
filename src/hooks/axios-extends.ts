@@ -23,15 +23,15 @@ const requestHandler = async (
     const urlProc = config.url?.replace(ReCutUrlPrefix, '/');
     config.url = import.meta.env.APP_API_MOCK_URL + urlProc;
   }
-  // if (config.token) {
-  //   const { getToken } = useTokenStore();
-  //   const token = getToken();
-  //   if (token) {
-  //     config.headers.set('Authorization', 'Bearer ' + token);
-  //   } else {
-  //     console.error(`Axios "requestHandler": Token is required for request '${config.method}' ${config.url}, but it is missing.`);
-  //   }
-  // }
+  if (config.token) {
+    const { getToken } = useTokenStore();
+    const token = getToken();
+    if (token) {
+      config.headers.set('Authorization', 'Bearer ' + token);
+    } else {
+      console.error(`Axios "requestHandler": Token is required for request '${config.method}' ${config.url}, but it is missing.`);
+    }
+  }
   if (config.loading) {
     // axiosLoading.addLoading();
   }

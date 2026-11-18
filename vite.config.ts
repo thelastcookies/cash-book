@@ -16,6 +16,14 @@ export default defineConfig(({ command }) => {
       server: {
         host: '0.0.0.0',
         port: 8203,
+        proxy: {
+          '/oidc-api': {
+            target: 'https://localhost:8190',
+            changeOrigin: true,
+            secure: false,
+            rewrite: (path: string) => path.replace(/^\/oidc-api/, ''),
+          }
+        }
       },
     });
   } else if (command === 'build') {
