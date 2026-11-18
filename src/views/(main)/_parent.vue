@@ -5,6 +5,7 @@ const router = useRouter();
 const tabs = [
   { title: '记账', path: '/' },
   { title: '分析', path: '/analysis' },
+  { title: '我', path: '/me' },
 ];
 
 const activePath = computed<string>({
