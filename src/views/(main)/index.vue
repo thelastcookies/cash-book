@@ -28,7 +28,7 @@ const groupedRecords = computed(() => {
   const grouped = groupBy(reversedRecords.value, (r: RecordRecord) => dayjs(r.createdAt).format('YYYY-MM-DD'));
   return Object.entries(grouped).map(([date, items]) => ({
     date,
-    label: dayjs(date).format('M月D日'),
+    label: dayjs(date).format('M月D日 ddd'),
     items,
   }));
 });
