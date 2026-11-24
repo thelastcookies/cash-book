@@ -1,6 +1,9 @@
 import { defineConfig, loadEnv } from 'vite';
 import { fileURLToPath, URL } from 'node:url'
 import { createVitePlugins } from './plugins/index.ts';
+import { createRequire } from 'node:module';
+
+const pkgVersion: string = createRequire(import.meta.url)('./package.json').version;
 
 const baseSrc = fileURLToPath(new URL('./src', import.meta.url));
 const imageSrc = fileURLToPath(new URL('./src/assets/images', import.meta.url));
@@ -40,6 +43,9 @@ export default defineConfig(({ command }) => {
     // .env 目录以及前缀设置
     envDir: '.env',
     envPrefix: 'APP_',
+    define: {
+      __APP_VERSION__: JSON.stringify(pkgVersion),
+    },
     // plugins
     plugins: createVitePlugins(),
     resolve: {

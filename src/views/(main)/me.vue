@@ -21,6 +21,8 @@ const onLogout = () => {
   signOut();
 };
 
+const version = __APP_VERSION__;
+
 </script>
 
 <template>
@@ -37,6 +39,7 @@ const onLogout = () => {
         is-link
         @click="onChangePassword"
       />
+      <van-cell title="版本信息" :value="version" />
     </van-cell-group>
 
     <!-- 退出登录 -->
