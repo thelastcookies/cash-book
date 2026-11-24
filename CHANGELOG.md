@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0](https://github.com/thelastcookies/cash-book/compare/v0.2.0...v0.3.0) (2026-11-24)
+
+
+### Features
+
+* 新增版本信息展示 ([cf3b2d7](https://github.com/thelastcookies/cash-book/commit/cf3b2d7976814f5ee57951cb5998190a4f3ea660))
+
+
+### Bug Fixes
+
+* 更新时间显示格式 ([58d31cf](https://github.com/thelastcookies/cash-book/commit/58d31cf8df433d27a66e4834457879f22562521e))
+
 ## [0.2.0](https://github.com/thelastcookies/cash-book/compare/v0.1.0...v0.2.0) (2026-11-18)
 
 
